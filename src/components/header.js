@@ -1,42 +1,74 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { styled } from "@adapters/styled-components"
+
 import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import { Link } from "@adapters/gatsby"
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+import { useSiteMetadata } from "@graphql/queries/site-metadata"
+
+const Wrapper = styled.header`
+  padding: 1rem 0 3rem;
+  ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    li {
+      a {
+        color: #999;
+        font-size: 0.9rem;
+        margin-right: 1.3rem;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #666666;
+      }
+    }
+  }
+`
+
+const Title = styled.h1`
+  color: #000000;
+  font-size: 3rem;
+  text-decoration: none;
+`
+
+const activeStyle = {
+  color: "#333",
 }
+const Header = () => {
+  const { title } = useSiteMetadata()
 
-Header.defaultProps = {
-  siteTitle: ``,
+  return (
+    <Wrapper>
+      <Title>{title}</Title>
+      <nav>
+        <ul>
+          <li>
+            <Link activeStyle={activeStyle} to="/">
+              Home
+            </Link>
+          </li>
+
+          <li>
+            <Link activeStyle={activeStyle} to="/About">
+              About
+            </Link>
+          </li>
+
+          <li>
+            <Link activeStyle={activeStyle} to="/Contact">
+              Contact
+            </Link>
+          </li>
+
+          <li>
+            <Link activeStyle={activeStyle} to="/Blog">
+              Blog
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </Wrapper>
+  )
 }
-
 export default Header
