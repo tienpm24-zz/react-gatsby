@@ -23,6 +23,7 @@ This is all the plugins that i have used in this project:
 - gatsby-transformer-sharp
 - gatsby-plugin-alias-imports
 - gatsby-source-contentful
+
   _You can find more details in https://www.gatsbyjs.com/_
 
 ## GraphQL
